@@ -12,6 +12,10 @@ fun vars(vararg a:Int){
 	for(ai in a){
 	    count+=ai
 	    println ("count is $count")
+            for(v in 1..5){
+                print("$v ")
+                if(v==ai) break
+            }
 	}
 }
 
