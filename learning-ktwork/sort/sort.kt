@@ -84,4 +84,17 @@ fun mergeSort(Size:Int,l:Int,r:Int,v:IntArray):IntArray{
     return a
 }
 
-fun heapSort
+fun heapSort(Size:Int,a:IntArray):IntArray{
+    var b=heapUp(a)
+}
+
+fun heapUp(a:IntArray):IntArray{
+    for(i in a.indices){
+        var point:Int=i
+        while(point!=0){
+            if(a[point]<a[point/2]){
+                
+            }
+        }
+    }
+}
