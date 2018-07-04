@@ -86,6 +86,44 @@ fun mergeSort(Size:Int,l:Int,r:Int,v:IntArray):IntArray{
 
 fun heapSort(Size:Int,a:IntArray):IntArray{
     var b=heapUp(a)
+    for(i in 0.. a.size){
+        a[i]=b[0];
+        Size-=1
+        b[0]=a[Size]
+        var point:Int=0
+        while(point in 0..Size){
+            if(point*2 in 0..Size&&point*2+1 in 0..Size){
+                if(b[point]>b[point*2]&&b[point]>b[point*2+1]){
+                    if(b[point*2]<b[point*2+1]){
+                        var s=b[point];b[point]=b[point*2];b[point*2]=s;
+                        point*=2;continue;
+                    }
+                    else{
+                        var s=b[point];b[point]=b[point*2+1];b[point*2+1]=s;
+                        point=point*2+1;continue;
+                    }
+                }
+                if(b[point]>b[point*2]){
+                    var s=b[point];b[point]=b[point*2];b[point*2]=s;
+                    point*=2;continue;
+                }
+                if(b[point]>b[point*2+1]){
+                    var s=b[point];b[point]=b[point*2+1];b[point*2+1]=s;
+                    point=point*2+1;continue;
+                }
+            }
+            if(point*2 in 0..Size && b[point]>b[point*2]){
+                var s=b[point];b[point]=b[point*2];b[point*2]=s;
+                point*=2;continue;
+            }
+            if(point*2+1 in 0..Size && b[point]>b[point*2+1]){
+                var s=b[point];b[point]=b[point*2+1];b[point*2+1]=s;
+                point=point*2+1;continue;
+            }
+            break;
+        }
+    }
+    return a
 }
 
 fun heapUp(a:IntArray):IntArray{
@@ -93,8 +131,13 @@ fun heapUp(a:IntArray):IntArray{
         var point:Int=i
         while(point!=0){
             if(a[point]<a[point/2]){
-                
+                var s:Int=a[point]
+                a[point]=a[point/2]
+                a[point/2]=s
+                point/=2
             }
+            else break
         }
     }
+    return a
 }
