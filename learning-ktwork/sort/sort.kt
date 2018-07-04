@@ -3,14 +3,17 @@ package test.sort
 fun main(args:Array<String>){
     var a:IntArray= intArrayOf(1,5,6,9,8,7,4,3,2)
     var b:IntArray
+    print("now we use kotlin to sort array-A:");println()
+    print("array-A:");Print(a)
+    println()
     b=globSort(a)
-    Print(b)
+    print("glob-sort:  ");Print(b)
     b=bucketSort(a)
-    Print(b)
+    print("bucket-sort:");Print(b)
     b=mergeSort(a.size,0,a.size-1,a)
-    Print(b)
+    print("merge-sort: ");Print(b)
     b=heapSort(a.size,a)
-    Print(b)
+    print("heap-sort:  ");Print(b)
 }
 
 fun Print(a:IntArray){
@@ -84,15 +87,25 @@ fun mergeSort(Size:Int,l:Int,r:Int,v:IntArray):IntArray{
     return a
 }
 
-fun heapSort(Size:Int,a:IntArray):IntArray{
-    var b=heapUp(a)
-    for(i in 0.. a.size){
-        a[i]=b[0];
+fun heapSort(S:Int,a:IntArray):IntArray{
+    var c:IntArray=heapUp(a)
+    var b=Array(S+1,{i->(i*0)})
+    for(i in c.indices)
+        b[i+1]=c[i]
+//    for(i in b) print("$i ")
+//    println()
+    var Size:Int=S
+//    print("S=$S $Size")
+    for(i in a.indices){
+//        for(j in b) print("$j ")
+//        println()
+        a[i]=b[1]
+//        print ("b[0]=${b[0]} ")
+        b[1]=b[Size]
         Size-=1
-        b[0]=a[Size]
-        var point:Int=0
-        while(point in 0..Size){
-            if(point*2 in 0..Size&&point*2+1 in 0..Size){
+        var point:Int=1
+        while(point in 1..Size){
+            if(point*2 in 1..Size&&point*2+1 in 1..Size){
                 if(b[point]>b[point*2]&&b[point]>b[point*2+1]){
                     if(b[point*2]<b[point*2+1]){
                         var s=b[point];b[point]=b[point*2];b[point*2]=s;
@@ -112,11 +125,11 @@ fun heapSort(Size:Int,a:IntArray):IntArray{
                     point=point*2+1;continue;
                 }
             }
-            if(point*2 in 0..Size && b[point]>b[point*2]){
+            if(point*2 in 1..Size && b[point]>b[point*2]){
                 var s=b[point];b[point]=b[point*2];b[point*2]=s;
                 point*=2;continue;
             }
-            if(point*2+1 in 0..Size && b[point]>b[point*2+1]){
+            if(point*2+1 in 1..Size && b[point]>b[point*2+1]){
                 var s=b[point];b[point]=b[point*2+1];b[point*2+1]=s;
                 point=point*2+1;continue;
             }
